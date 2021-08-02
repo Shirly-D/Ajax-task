@@ -120,6 +120,10 @@ li {
   main styling starts here
 =================================*/
 
+button {
+  display: none;
+}
+
 
 
 
