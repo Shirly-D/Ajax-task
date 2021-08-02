@@ -2,26 +2,27 @@
 
 */
 var start = 0, end = 6;
-var load = document.querySelector('button');
-load.addEventListener('click', loadMore(start + 6, end + 6));
+var abc = document.querySelector('button');
+abc.addEventListener('click', function() {loadMore(start, end)});
 
 
-function loadMore(start = 0, end = 6) {
+function loadMore(begin = 0, last = 6) {
     var http = new XMLHttpRequest();
-    
     http.onload = function () {
         var a = JSON.parse(this.responseText);
-        for (var i = start; i < end; i++) 
+        console.log(a);
+        for (var i = begin; i < last; i++) 
         {
             var title = document.createElement('h4');
-            title.textContent = "Title: ";
+            title.textContent = "Title: " + a[i].title;
+            console.log(document.getElementById('result'));
+            document.getElementById('result').appendChild(title);
+           
             var body = document.createElement('p');
-            body.textContent = "Body: ";
-            document.querySelector('div').appendChild(title);
-            document.querySelector('div').appendChild(body);
-
-        
-
+            body.textContent = "Body: " + a[i].body;
+            document.getElementById('result').appendChild(body);
+            
+            
             console.log(a[i]);
             
             
@@ -32,8 +33,11 @@ function loadMore(start = 0, end = 6) {
     }
     http.open("GET", "https://jsonplaceholder.typicode.com/posts");
     http.send();
+    start += 6;
+    end += 6;
     
 }
+loadMore(start, end);
 
 
 
